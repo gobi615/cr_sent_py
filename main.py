@@ -29,7 +29,7 @@ def hello(m):
 bearer_token = os.environ.get("BEARER_TOKEN")
 search_url = os.environ.get("SEARCH_URL")
 query_params = {'query': 'CRYPTO','tweet.fields': 'author_id,created_at', 'max_results':'100'}
-keywords = ['crypto ban', 'crypto market crash', 'market down', 'bear market', 'stock market crash', 'legal tender', 'china crypto ban', 'crypto exchange ban', 'bearish','baby floki coin', 'going down', 'restricted', 'crash', 'announcement']
+keywords = ['crypto ban', 'crypto market crash', 'market down', 'bear market', 'stock market crash', 'legal tender', 'china crypto ban', 'crypto exchange ban', 'bearish','baby floki coin', 'going down', 'restricted', 'crash']
 
 def bearer_oauth(r):
     """
