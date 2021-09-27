@@ -124,7 +124,9 @@ def tweet_check():
 
 def start():
   while True:
+      print('tweet checking')
       tweet_check()
+      print('going to sleep')
       time.sleep(10) #make function to sleep for 10 seconds
 
 @server.route('/' + TOKEN, methods=['POST'])
