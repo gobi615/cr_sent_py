@@ -5,11 +5,16 @@ import re
 import emoji
 import contractions
 import requests 
+from flask import Flask, request
 
 global dict
 
+
 API_KEY = os.environ['API_KEY']
 bot = telebot.TeleBot(API_KEY)
+TOKEN = API_KEY
+
+server = Flask(__name__)
 
 # @bot.message_handler(commands=['Greet'])
 # def greet(m):  
@@ -122,4 +127,20 @@ def start():
       tweet_check()
       time.sleep(10) #make function to sleep for 10 seconds
 
-bot.polling()
+@server.route('/' + TOKEN, methods=['POST'])
+def getMessage():
+    json_string = request.get_data().decode('utf-8')
+    update = telebot.types.Update.de_json(json_string)
+    bot.process_new_updates([update])
+    return "!", 200
+
+
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://crypt-sent-py.herokuapp.com/' + TOKEN)
+    return "!", 200
+
+
+if __name__ == "__main__":
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
