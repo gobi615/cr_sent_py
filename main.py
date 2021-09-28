@@ -68,11 +68,9 @@ def connect_to_endpoint(url, params):
 
 dict = []
 
-   
-
+urls = create_url()  
+params = get_params()
 def tweet_check():
-    urls = create_url()
-    params = get_params()
     # print(urls)
     for url in urls:
       json_response = connect_to_endpoint(url, params)
