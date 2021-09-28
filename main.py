@@ -48,7 +48,7 @@ def get_params():
     # in_reply_to_user_id, lang, non_public_metrics, organic_metrics,
     # possibly_sensitive, promoted_metrics, public_metrics, referenced_tweets,
     # source, text, and withheld
-    return {'max_results':maxresult}
+    return {'max_results':str(maxresult)}
 
 def bearer_oauth(r):
     """
