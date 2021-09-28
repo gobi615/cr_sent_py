@@ -10,7 +10,10 @@ global dict
 API_KEY = os.environ['API_KEY']
 bot = telebot.TeleBot(API_KEY)
 TOKEN = API_KEY
-keywords = ['crypto ban', 'crypto market crash', 'market down', 'bear market', 'stock market crash', 'legal tender', 'china crypto ban', 'crypto exchange ban', 'bearish','baby floki coin', 'going down', 'restricted', 'crash']
+WORDS = os.environ['KEYWORDS']
+keywords = []
+for sentence in WORDS.split(','):
+  keywords.append(sentence.strip())
 
 server = Flask(__name__)
 
