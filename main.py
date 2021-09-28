@@ -31,8 +31,8 @@ totalTmln = os.environ.get("TOT")
 tmlns = []
 
 def create_url():
-  for i in range(1, totalTmln+1):
-    tmln = 'T'+i
+  for i in range(1, int(totalTmln)+1):
+    tmln = 'T'+str(i)
     tmlns.append(url+"{}/tweets".format(os.environ.get(tmln)))
   return tmlns
 
@@ -73,10 +73,10 @@ dict = []
 def tweet_check():
     urls = create_url()
     params = get_params()
-    print(urls)
+    # print(urls)
     for url in urls:
       json_response = connect_to_endpoint(url, params)
-      print(json.dumps(json_response, indent=4, sort_keys=True))
+      # print(json.dumps(json_response, indent=4, sort_keys=True))
       # print(json_response['data'][0]['text'])
       # print(json.dumps(json_response, indent=4, sort_keys=True))
       # print("Number of tweets: {}".format(len(json_response['data'])))
