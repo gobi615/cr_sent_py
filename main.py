@@ -26,14 +26,14 @@ def hello(m):
 
 bearer_token = os.environ.get("BEARER_TOKEN")
 url = os.environ.get("URL")
-totalTmln = os.environ.get("TOT")
+tmln = os.environ.get("T")
 
 tmlns = []
 
 def create_url():
-  for i in range(1, int(totalTmln)+1):
-    tmln = 'T'+str(i)
-    tmlns.append(url+"{}/tweets".format(os.environ.get(tmln)))
+  ids = tmln.split(',')
+  for id in ids:
+    tmlns.append(url+"{}/tweets".format(id))
   return tmlns
 
 def get_params():
