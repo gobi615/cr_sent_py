@@ -30,7 +30,8 @@ def hello(m):
 bearer_token = os.environ.get("BEARER_TOKEN")
 url = os.environ.get("URL")
 tmln = os.environ.get("T")
-
+maxresult = os.environ.get("MAX_RESULT")
+interval = os.environ.get("QUERY_INTERVAL")
 tmlns = []
 
 def create_url():
@@ -47,7 +48,7 @@ def get_params():
     # in_reply_to_user_id, lang, non_public_metrics, organic_metrics,
     # possibly_sensitive, promoted_metrics, public_metrics, referenced_tweets,
     # source, text, and withheld
-    return {"tweet.fields": "created_at", 'max_results':'10'}
+    return {'max_results':maxresult}
 
 def bearer_oauth(r):
     """
@@ -75,7 +76,7 @@ urls = create_url()
 params = get_params()
 def tweet_check():
     # print(urls)
-    for url in urls:
+    for url in urls:      
       json_response = connect_to_endpoint(url, params)
       # print(json.dumps(json_response, indent=4, sort_keys=True))
       # print(json_response['data'][0]['text'])
@@ -89,14 +90,14 @@ def tweet_check():
             if(tweet['id'] not in dict):
               bot.send_message(last_msg.chat.id,tweet['text'])
               dict.append(tweet['id'])
-    #print(json_response['data'][0]['text'])
+      print('going to sleep')
+      time.sleep(int(interval)) #make function to sleep for 10 seconds
+      #print(json_response['data'][0]['text'])
 
 def start():
   while True:
       print('tweet checking')
       tweet_check()
-      print('going to sleep')
-      time.sleep(10) #make function to sleep for 10 seconds
 
 @server.route('/' + TOKEN, methods=['POST'])
 def getMessage():
